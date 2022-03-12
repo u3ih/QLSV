@@ -1,11 +1,10 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
 
 const { Option } = Select;
 
 const AddStudent = ({addStudent}) => {
   const [form] = Form.useForm();
-  const refForm = useRef();
 
   const formItemLayout = {
           labelCol: {
@@ -24,15 +23,14 @@ const AddStudent = ({addStudent}) => {
       
   const onFinish = (values) => {
     addStudent(values)
-    refForm.current.setFieldsValue({
+    form.setFieldsValue({
       name:"",
       idStudent:"",
       age:"",
       address:"",
       description:"",
-      gender: "seclect your gender"
+      gender: ""
     })
-    console.log("thêm oke")
   }      
 
 
@@ -40,9 +38,9 @@ const AddStudent = ({addStudent}) => {
       console.log('Failed:', errorInfo);
   };
 
+
   return (
     <Form
-      ref={refForm}
       {...formItemLayout}
       form={form}
       style={{
@@ -86,13 +84,7 @@ const AddStudent = ({addStudent}) => {
       >
         <Input placeholder="Nhập địa chỉ" />
       </Form.Item>
-      <Form.Item 
-        label="Miêu tả" 
-        name="description"
-        rules={[{ required: true, message: 'Nhập thông tin' }]}
-      >
-        <Input placeholder="Nhập miêu tả" />
-      </Form.Item>
+
       <Form.Item
         name="gender"
         label="Giới tính"
